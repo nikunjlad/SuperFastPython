@@ -45,10 +45,17 @@
 
 ### When to use ThreadPoolExecutor
 
+ThreadPoolExecutor is only to be used when:
+    - Tasks can be defined as pure function aka they produce a result given an input and has no side-effects or change state of any other global variable.
+    - The task can fit within a single Python function (making it simple and easy to understand)
+    - The same task needs to be performed many times with different arguments or different input data
+    - We need to call the same function for each object in a collection using a for-loop
 
 ### Limitations of Threads in Python
 
-### ThreadPoolExecutor for I/O bound tasks
-
+- Due to GIL (Global Interpreter Lock), we can only run one thread at a time within a Python process. 
+- We can write concurrent code with threads in Python but we may not be able to execute our code in parallel due to this limitation.
+- GIL is released by the Python Interpreter sometimes to allow other threads to run in parallel and this is only during I/O operation where a thread is blocked or waiting for an external task to finish.
+- A thread performing an I/O operation is blocked for the duration of an external operation (read/write to disk, send/receive data over socket, etc). This gives the OS the chance to let other threads run while suspending this thread until it gets the control back from the external operation.
 
 
