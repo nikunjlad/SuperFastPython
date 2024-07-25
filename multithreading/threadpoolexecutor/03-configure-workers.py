@@ -1,6 +1,6 @@
 # import relevant libraries
 from concurrent.futures import ThreadPoolExecutor
-import time
+import time, threading
 
 # custom task function
 def task(number):
@@ -19,6 +19,8 @@ if __name__ == "__main__":
         
         # issue many tasks to the pool
         _ = exe.map(task, range(1000))
+
+        print(threading.active_count())
 
 
 
